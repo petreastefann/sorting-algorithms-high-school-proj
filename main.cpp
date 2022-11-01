@@ -1,14 +1,15 @@
 #include <iostream>
 #include <vector>
-#include <random>
-#include <algorithm>
+#include <random>       //std::random_device()
+#include <algorithm>    //std::shuffle()
+#include <Windows.h>    //Sleep()
 #include <fstream>
 
-void selectionsort(unsigned short arr[], unsigned short n) {
-    unsigned short i, j, min_idx;
-    for (i = 0; i < n - 1; i++) {  // everything before 'i' is sorted
+void selectionsort(std::vector<int>& arr) {
+    unsigned short min_idx;
+    for (int i = 0; i < arr.size()-1; i++) {  // everything before 'i' is sorted
         min_idx = i;
-        for (j = i + 1; j < n; j++)  //'j' searches elements after 'i' to find the smallest
+        for (int j = i + 1; j < arr.size(); j++)  //'j' searches elements after 'i' to find the smallest
             if (arr[j] < arr[min_idx])
                 min_idx = j;
         std::swap(arr[min_idx], arr[i]);  // element on 'i' position gets swapped with the smallest element
@@ -152,17 +153,13 @@ void bogosort(std::vector<int>& arr) {
 
 int main() {
     std::cout << "                       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~      \n                       |  Un algoritm de sortare este un algoritm care pune elementele unei liste | \n                         \\ intr-o anumita ordine. Cel mai des intalnite sunt ordinea numerica si / \n                            \\ ordinea lexicografica. Chiar daca problema sortarii unei liste / \n                               \\  de elemente pare triviala, ea a fost si este cerce-   / \n                                  \\  tata in mod foarte serios. Ca rezultat al aces- / \n                                     \\    tei cercetari s-au elaborat mai multi   / \n                                        \\    algoritmi de sortare. Primii din- / \n                                           |   tre ei dateaza de prin anii  | \n                                         /   '50 (bubble sort-1956), iar cei  \\ \n                                      /   mai recenti au aparut cu putini ani in  \\ \n                                 / urma (library sort-2004). O asemenea activitate de \\ \n                             / cercetare este pe deplin justificata deoarece, pe de o parte \\ \n                          /  rezolvarea in mod eficient a problemei sortarii nu este deloc sim-\\ \n                        /   pla, iar pe de alta parte sortarea este o operatie foarte des folosi-  \\ \n                     | ta si este necesar ca ea sa se efectueze intr-un mod cat se poate de eficient.| \n                     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~      \n";
-    for (unsigned long delay = 0; delay < 299999999; delay++)
-        ;  // in loc de Sleep() sau sleep_for()
+    Sleep(1000);
     std::cout << ".";
-    for (unsigned long delay = 0; delay < 299999999; delay++)
-        ;
+    Sleep(1000);
     std::cout << ".";
-    for (unsigned long delay = 0; delay < 299999999; delay++)
-        ;
+    Sleep(1000);
     std::cout << ".";
-    for (unsigned long delay = 0; delay < 299999999; delay++)
-        ;
+    Sleep(1000);
     std::cout << "\n";
     char m;
     do {
@@ -334,10 +331,10 @@ int main() {
                     std::cout << "pentru sirul de numere:";
                     for (int i = 0; i < arr.size(); i++)
                         std::cout << arr[i] << " ";
-                    for (unsigned long delay = 0; delay < 999999999; delay++);
+                    Sleep(2000);
                     std::cout << "\nOof, se pare ca va trebui sa astepti un moment avand in vedere metoda de sortare aleasa :\\\n";
-                    for (unsigned long delay = 0; delay < 999999999; delay++);
-                    for (unsigned long delay = 0; delay < 999999999; delay++);
+                    Sleep(1000);
+                    Sleep(1000);
                     bogosort(arr);
                     std::cout << "\navem sirul sortat:";
                     for (int i = 0; i < arr.size(); i++)
@@ -355,49 +352,37 @@ int main() {
                 std::cin.get(key, 21, '\n');
                 std::cin.ignore(21, '\n');
                 std::cout << "Next up: Heap Sort";
-                for (unsigned long delay = 0; delay < 499999999; delay++)
-                    ;
+                Sleep(700);
                 std::cout << ".";
-                for (unsigned long delay = 0; delay < 499999999; delay++)
-                    ;
+                Sleep(700);
                 std::cout << ".";
-                for (unsigned long delay = 0; delay < 499999999; delay++)
-                    ;
+                Sleep(700);
                 std::cout << ".";
-                for (unsigned long delay = 0; delay < 499999999; delay++)
-                    ;
+                Sleep(700);
                 std::cout << "\n\n-Heap Sort (derivat din Selection Sort) care in prima faza reordoneaza \nelementele sirului pentru a satisface proprietatea arborelui (heap). Algoritmul \nschimba apoi in mod repetat prima valoare a listei cu ultima valoare, micsorand \nintervalul de elemente considerate in operatia heap si mutand noua prima valoare \nin pozitia sa in heap. Acestea se repeta pana cand intervalul valorilor luate \nin considerare are o valoare in lungime. \n";
                 std::cout << "(introduceti orice caracter pentru a continua)\n";
                 std::cin.get(key, 21, '\n');
                 std::cin.ignore(21, '\n');
                 std::cout << "Next up: Gnome Sort";
-                for (unsigned long delay = 0; delay < 499999999; delay++)
-                    ;
+                Sleep(700);
                 std::cout << ".";
-                for (unsigned long delay = 0; delay < 499999999; delay++)
-                    ;
+                Sleep(700);
                 std::cout << ".";
-                for (unsigned long delay = 0; delay < 499999999; delay++)
-                    ;
+                Sleep(700);
                 std::cout << ".";
-                for (unsigned long delay = 0; delay < 499999999; delay++)
-                    ;
+                Sleep(700);
                 std::cout << "\n\n-Gnome Sort (numit si Stupid Sort) care este bazat pe ideea ca daca elementul \ncurent si cel din stanga sunt in ordinea corespunzatoare 'i' se muta la dreapta, \ninsa daca elementul din stanga este mai mare decat cel curent acestea isi \nschimba pozitiile iar 'i' se da cu un pas inapoi. Cand 'i' trece de capatul \nsirului se considera ca sirul a fost sortat. \n";
                 std::cout << "(introduceti orice caracter pentru a continua)\n";
                 std::cin.get(key, 21, '\n');
                 std::cin.ignore(21, '\n');
                 std::cout << "Next up: Cocktail Sort";
-                for (unsigned long delay = 0; delay < 499999999; delay++)
-                    ;
+                Sleep(700);
                 std::cout << ".";
-                for (unsigned long delay = 0; delay < 499999999; delay++)
-                    ;
+                Sleep(700);
                 std::cout << ".";
-                for (unsigned long delay = 0; delay < 499999999; delay++)
-                    ;
+                Sleep(700);
                 std::cout << ".";
-                for (unsigned long delay = 0; delay < 499999999; delay++)
-                    ;
+                Sleep(700);
                 std::cout << "\n\n-Cocktail Sort (derivat din sortarea prin metoda bulelor) care spre deosebire \nde Bubble Sort (cauta doar cel mai mic numar de dupa capatul din stanga), \nacesta cauta in acelasi timp si cel mai mic numar de dupa capatul din stanga \ndar si cel mai mare numar de dinaintea capatului din dreapta, sortand astfel \npe ambele parti sirul pana la centru, metoda fiind asemanatoare agitarii \nunui cocktail. ";
                 break;
             }
@@ -407,17 +392,13 @@ int main() {
             }
             default: {
                 std::cout << "Iesire din aplicatie";
-                for (unsigned long delay = 0; delay < 499999999; delay++)
-                    ;
+                Sleep(800);
                 std::cout << ".";
-                for (unsigned long delay = 0; delay < 499999999; delay++)
-                    ;
+                Sleep(800);
                 std::cout << ".";
-                for (unsigned long delay = 0; delay < 499999999; delay++)
-                    ;
+                Sleep(800);
                 std::cout << ".";
-                for (unsigned long delay = 0; delay < 499999999; delay++)
-                    ;
+                Sleep(800);
                 break;
             }
         }
