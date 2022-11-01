@@ -7,9 +7,9 @@
 
 void selectionsort(std::vector<int>& arr) {
     unsigned short min_idx;
-    for (int i = 0; i < arr.size()-1; i++) {  // everything before 'i' is sorted
+    for (unsigned short i = 0; i < arr.size()-1; i++) {  // everything before 'i' is sorted
         min_idx = i;
-        for (int j = i + 1; j < arr.size(); j++)  //'j' searches elements after 'i' to find the smallest
+        for (unsigned short j = i + 1; j < arr.size(); j++)  //'j' searches elements after 'i' to find the smallest
             if (arr[j] < arr[min_idx])
                 min_idx = j;
         std::swap(arr[min_idx], arr[i]);  // element on 'i' position gets swapped with the smallest element
@@ -18,14 +18,13 @@ void selectionsort(std::vector<int>& arr) {
 
 /**==========================================================*/
 
-void bubblesort(unsigned short arr[], unsigned short n) {
-    unsigned short i;
+void bubblesort(std::vector<int>& arr) {
     bool verif = true;
-    while (verif == true) {  // as long as a std::swap has happened during a loop, the same loop will repeat itself
-        verif = false;       // at first we say that no loops have happened
-        for (i = 0; i < n - 1; i++)
+    while (verif == true) {             // as long as a std::swap has happened during a loop, the same loop will repeat itself
+        verif = false;                  // at first we say that no loops have happened
+        for (unsigned short i = 0; i < arr.size()-1; i++)
             if (arr[i] > arr[i + 1]) {
-                verif = true;  // if a loop happened then make 'verif' true
+                verif = true;           // if a loop happened then make 'verif' true
                 std::swap(arr[i], arr[i + 1]);
             }
     }
@@ -33,13 +32,11 @@ void bubblesort(unsigned short arr[], unsigned short n) {
 
 /**==========================================================*/
 
-void insertionsort(unsigned short arr[], unsigned short n) {
-    unsigned short i, key;
+void insertionsort(std::vector<int>& arr) {
     short j;
-    for (i = 1; i < n; i++) {
-        key = arr[i];
+    for (unsigned short i = 1; i < arr.size(); i++) {
+        unsigned short key = arr[i];
         for (j = i - 1; j >= 0 && arr[j] > key; j--)  // Move elements of arr[0..i-1], that are greater than key, to one position ahead of their current position
-
             std::swap(arr[j + 1], arr[j]);
         arr[j + 1] = key;
     }
@@ -47,11 +44,10 @@ void insertionsort(unsigned short arr[], unsigned short n) {
 
 /**==========================================================*/
 
-void merge(int arr[], int firstindex, int mid, int lastindex) {  // Merges two subarrays of arr[]. First subarray is arr[firstindex..mid]. Second subarray is arr[mid+1..lastindex]
+void merge(std::vector<int>& arr, int firstindex, int mid, int lastindex) {  // Merges two subarrays of arr[]. First subarray is arr[firstindex..mid]. Second subarray is arr[mid+1..lastindex]
     /*arr=initial array, larr=temporary left array, rarr=temporary right array,
     n=nb of elem for larr, m=nb of elem for rarr. firstindex, mid, lastindex are
-    the indexes of the current array(arr, larr or rarr)
-    */
+    the indexes of the current array(arr, larr or rarr)*/
     int i, j, k;
     int n = mid - firstindex + 1;
     int m = lastindex - mid;
