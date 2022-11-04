@@ -6,6 +6,9 @@
 #include <fstream>
 
 void selectionsort(std::vector<int>& arr) {
+    // iterate from 0 to n-1. find the smallest element from 0 to n-1 and switch it with the one at the index 0
+    // then iterate from 1 to n-1. find the smallest element from 1 to n-1 and switch it with the one at the index 1
+    // etc.
     unsigned short min_idx;
     for (unsigned short i = 0; i < arr.size()-1; i++) {  // everything before 'i' is sorted
         min_idx = i;
@@ -19,6 +22,8 @@ void selectionsort(std::vector<int>& arr) {
 /**==========================================================*/
 
 void bubblesort(std::vector<int>& arr) {
+    // iterate from 0 to n-2. always compare the curr elem with the next one and if they are in the wrong order swap them
+    // if no swaps were made in an interation then the array is sorted and the algorithm can stop
     bool verif = true;
     while (verif == true) {             // as long as a std::swap has happened during a loop, the same loop will repeat itself
         verif = false;                  // at first we say that no loops have happened
@@ -33,6 +38,7 @@ void bubblesort(std::vector<int>& arr) {
 /**==========================================================*/
 
 void insertionsort(std::vector<int>& arr) {
+    // iterate from 1 to n-1. take the element at the current index and insert it in the sorted part of the array
     short j;
     for (unsigned short i = 1; i < arr.size(); i++) {
         unsigned short key = arr[i];
@@ -44,7 +50,8 @@ void insertionsort(std::vector<int>& arr) {
 
 /**==========================================================*/
 
-void merge(std::vector<int>& arr, int firstindex, int mid, int lastindex) {  // Merges two subarrays of arr[]. First subarray is arr[firstindex..mid]. Second subarray is arr[mid+1..lastindex]
+void merge(std::vector<int>& arr, int firstindex, int mid, int lastindex) {  
+    // Merges two subarrays of arr[]. First subarray is arr[firstindex..mid]. Second subarray is arr[mid+1..lastindex]
     /*arr=initial array, larr=temporary left array, rarr=temporary right array,
     n=nb of elem for larr, m=nb of elem for rarr. firstindex, mid, lastindex are
     the indexes of the current array(arr, larr or rarr)*/
@@ -52,7 +59,7 @@ void merge(std::vector<int>& arr, int firstindex, int mid, int lastindex) {  // 
     int n = mid - firstindex + 1;
     int m = lastindex - mid;
     /* create temp arrays */
-    int larr[n], rarr[m];
+    std::vector<int> larr(n), rarr(m);
     /* Copy data to temp arrays larr[] and rarr[] */
     for (i = 0; i < n; i++)
         larr[i] = arr[firstindex + i];
@@ -85,7 +92,7 @@ void merge(std::vector<int>& arr, int firstindex, int mid, int lastindex) {  // 
     }
 }
 
-void mergesort(int arr[], int firstindex, int lastindex) {
+void mergesort(std::vector<int>& arr, int firstindex, int lastindex) {
     // firstindex is for left index and lastindex is right index of the sub-array of arr to be sorted
     if (firstindex < lastindex) {
         // Same as (firstindex+lastindex)/2, but avoids overflow for large firstindex and lastindex
@@ -99,7 +106,7 @@ void mergesort(int arr[], int firstindex, int lastindex) {
 
 /**==========================================================*/
 
-int partition(int arr[], int firstindex, int lastindex) {  // This function takes the last element as pivot, places the pivot element at its correct position in sorted array, and places all the smaller elements than the pivot to the left of it and all the greater elements to the right of it
+int partition(std::vector<int>& arr, int firstindex, int lastindex) {  // This function takes the last element as pivot, places the pivot element at its correct position in sorted array, and places all the smaller elements than the pivot to the left of it and all the greater elements to the right of it
     int j, pivot = arr[lastindex], i = firstindex;         // Index of smaller element
     for (j = firstindex; j <= lastindex - 1; j++) {
         // If current element is smaller than the pivot
@@ -110,7 +117,7 @@ int partition(int arr[], int firstindex, int lastindex) {  // This function take
     return (i);
 }
 
-void quicksort(int arr[], int firstindex, int lastindex) {
+void quicksort(std::vector<int>& arr, int firstindex, int lastindex) {
     if (firstindex < lastindex) {
         // pi is partitioning index, arr[pi] is at the right place
         int pi = partition(arr, firstindex, lastindex);
@@ -181,19 +188,13 @@ int main() {
                     std::cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\nSelection Sort (sau sortarea prin selectie) este unul dintre cei mai simpli \nalgoritmi de sortare si probabil cel mai bun algoritm de sortare in complexitate \nO(n^2), datorita numarului foarte mic de interschimbari pe care le efectueaza \nin comparatie cu Bubble Sort, dar si a constantei 1/2 din spatele acestei \ncomplexitati. Selection Sort este ineficient in cazul listelor mari, insa \nacesta este cunoscut pentru dificultatea usoara si performanta acestuia \nin cazul unei memorii limitate. \n";
                 } else if (sls_m == 1) {
                     std::cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\nSortarea foloseste doua variabile 'i' si 'j' drept indecsi pentru a realiza \ninterschimbari intre elementele de pe pozitiile acestora. Programul se foloseste \nde 'i' acesta pentru a realiza sortarea. Programul cauta cel mai mic element \nde la dreapta lui 'i' cu ajutorul lui 'j'. Dupa gasirea acestuia se \ninterschimba valorile dintre 'i' si cel mai mic element gasit iar 'i'-ul se \nincrementeaza. Astfel partea din stanga a lui 'i' este sortata.\n";
-                    unsigned short n;
-                    std::ifstream fisier1("sir nesortat.txt");
-                    fisier1 >> n;
-                    unsigned short arr[n], i = 0;
-                    while (fisier1 >> arr[i])
-                        i++;
-                    fisier1.close();
+                    std::vector<int> arr={8,3,5,2,1,4,7,6,3,9,0,3};
                     std::cout << "pentru sirul de numere:";
-                    for (i = 0; i < n; i++)
+                    for (int i = 0; i < arr.size(); i++)
                         std::cout << arr[i] << " ";
-                    selectionsort(arr, n);
+                    selectionsort(arr);
                     std::cout << "\navem sirul sortat:";
-                    for (i = 0; i < n; i++)
+                    for (int i = 0; i < arr.size(); i++)
                         std::cout << arr[i] << " ";
                 } else {
                     std::cout << "Oops! Se pare ca a fost introdusa o valoare gresita.\n";
@@ -210,19 +211,13 @@ int main() {
                     std::cout << "Cel mai rau caz este cel in care vectorul dat este sortat descrescator \n(in ordinea opusa celei in care vrem sa-l sortam). Singurul avantaj al Bubble \nSort-ului e ca este proiectat de asa natura incat se opreste la doar o intrare \nin do while dupa ce vectorul este deja sortat. Foarte putini algoritmi de sortare \nsunt capabili sa detecteze daca au terminat de sortat vectorul si sa se opreasca. \nDesi exista mai multe metode de sortare cu aceeasi complexitate ca Bubble Sort, \nele sunt mai rapide in practica. Asta se datoreaza numarului foarte mare de \ninterschimbari (std::swap-uri) efectuate de Bubble Sort. In medie, eficienta acestui \nalgoritm reprezinta 70% din cea a sortarii prin selectie.";
                 } else if (bbs_m == 1) {
                     std::cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\nSortarea foloseste un vector 'i' drept index,comparand valoarea elementului de \npe pozitia acestuia cu valoarea elementului vecin (in general cel din dreapta). \nDaca valoarea din dreapta este mai mica decat cea curenta atunci se interschimba \nvalorile urmand ca indexul sa fie incrementat. Pentru a se sorta sirul este \nnecesara repetitia acestui pas de cate ori este nevoie pana cand programul \ndetecteaza ca sirul este sortat.\n";
-                    unsigned short n;
-                    std::ifstream fisier1("sir nesortat.txt");
-                    fisier1 >> n;
-                    unsigned short arr[n], i = 0;
-                    while (fisier1 >> arr[i])
-                        i++;
-                    fisier1.close();
+                    std::vector<int> arr={8,3,5,2,1,4,7,6,3,9,0,3};
                     std::cout << "pentru sirul de numere:";
-                    for (i = 0; i < n; i++)
+                    for (int i = 0; i < arr.size(); i++)
                         std::cout << arr[i] << " ";
-                    bubblesort(arr, n);
+                    bubblesort(arr);
                     std::cout << "\navem sirul sortat:";
-                    for (i = 0; i < n; i++)
+                    for (int i = 0; i < arr.size(); i++)
                         std::cout << arr[i] << " ";
                 } else {
                     std::cout << "Oops! Se pare ca a fost introdusa o valoare gresita.\n";
@@ -238,19 +233,13 @@ int main() {
                     std::cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\nSortarea prin insertie (Insertion Sort) este o metoda de sortare a vectorilor \nin complexitate O(n^2) oarecum asemanatoare cu cea prin selectie. Primul for \nefectueaza O(n) iteratii, iar al doilea, in cel mai rau caz, tot O(n). Prin \nurmare, complexitatea in timp a sortarii prin insertie este O(n^2). \n";
                 } else if (iss_m == 1) {
                     std::cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\nAlgoritmul se foloseste de un index 'j' pentru a sorta toate elementele din \nstanga lui 'i'. Programul muta spre dreapta toate elementele din stanga lui 'i' \nmai mari decat acesta, urmand ca acesta sa fie pus pe pozitia lui 'j'. In \ncele din urma 'i'-ul este incrementat.\n";
-                    unsigned short n;
-                    std::ifstream fisier1("sir nesortat.txt");
-                    fisier1 >> n;
-                    unsigned short arr[n], i = 0;
-                    while (fisier1 >> arr[i])
-                        i++;
-                    fisier1.close();
+                    std::vector<int> arr={8,3,5,2,1,4,7,6,3,9,0,3};
                     std::cout << "pentru sirul de numere:";
-                    for (i = 0; i < n; i++)
+                    for (int i = 0; i < arr.size(); i++)
                         std::cout << arr[i] << " ";
-                    insertionsort(arr, n);
+                    insertionsort(arr);
                     std::cout << "\navem sirul sortat:";
-                    for (i = 0; i < n; i++)
+                    for (int i = 0; i < arr.size(); i++)
                         std::cout << arr[i] << " ";
                 } else {
                     std::cout << "Oops! Se pare ca a fost introdusa o valoare gresita.\n";
@@ -266,19 +255,13 @@ int main() {
                     std::cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\nMerge Sort este unul dintre cei mai optimi algoritmi de sortare, acesta fiind \nbazat pe comparari eficiente. Algoritmul care sta la baza Merge Sort-ului este \nde tip divide et impera si are o complexitate de O(nlogn). \n";
                 } else if (mgs_m == 1) {
                     std::cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\nFiind un algoritm bazat pe metoda divide et impera, Merge Sort se foloseste de \naceasta metoda pentru a sorta eficient un sir de numere. Este necesara existenta \na doua subprograme astfel: primul subprogram 'mergesort' imparte sirul in \njumatati pana cand fiecare parte ajunge sa consiste dintr-un singur element. \nAl doilea subprogram 'merge' creeaza doua subsiruri 'larr' si 'rarr', compara \nelementele acestora si dupa le cupleaza in functie de recursivitatea \nprogramului 'mergesort'. \n";
-                    int n;
-                    std::ifstream fisier1("sir nesortat.txt");
-                    fisier1 >> n;
-                    int arr[n], i = 0;
-                    while (fisier1 >> arr[i])
-                        i++;
-                    fisier1.close();
+                    std::vector<int> arr={8,3,5,2,1,4,7,6,3,9,0,3};
                     std::cout << "pentru sirul de numere:";
-                    for (i = 0; i < n; i++)
+                    for (int i = 0; i < arr.size(); i++)
                         std::cout << arr[i] << " ";
-                    mergesort(arr, 0, n - 1);
+                    mergesort(arr, 0, arr.size() - 1);
                     std::cout << "\navem sirul sortat:";
-                    for (i = 0; i < n; i++)
+                    for (int i = 0; i < arr.size(); i++)
                         std::cout << arr[i] << " ";
                 } else {
                     std::cout << "Oops! Se pare ca a fost introdusa o valoare gresita.\n";
@@ -295,19 +278,13 @@ int main() {
                 } else if (qks_m == 1) {
                     std::cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\nQuick Sort foloseste un element drept pivot. Spre deosebire de Merge Sort, \npivotul poate fi la centru, sau in oricare alta locatie. Acest lucru este \ndeterminat de subprogramul 'quicksort'. Pe langa acestea, pe cand Merge Sort \nintai imparte sirul in parti de cate un element fiecare, mai apoi sortandu-le, \n";
                     std::cout << "Quick Sort ia pivotul, muta toate elementele mai mici decat acesta spre stanga \nlocatiei unde elementul 'pivot' trebuie sa se afle si cele mai mari in dreapta. \nDupa ce gaseste locul in care acesta trebuie sa fie, algoritmul imparte sirul \nin doua parti, luand mai intai ceea ce se afla la stanga pivotului si repetand \naceiasi pasi pana cand sirul este sortat. \n";
-                    int n;
-                    std::ifstream fisier1("sir nesortat.txt");
-                    fisier1 >> n;
-                    int arr[n], i = 0;
-                    while (fisier1 >> arr[i])
-                        i++;
-                    fisier1.close();
+                    std::vector<int> arr={8,3,5,2,1,4,7,6,3,9,0,3};
                     std::cout << "pentru sirul de numere:";
-                    for (i = 0; i < n; i++)
+                    for (int i = 0; i < arr.size(); i++)
                         std::cout << arr[i] << " ";
-                    quicksort(arr, 0, n - 1);
+                    quicksort(arr, 0, arr.size() - 1);
                     std::cout << "\navem sirul sortat:";
-                    for (i = 0; i < n; i++)
+                    for (int i = 0; i < arr.size(); i++)
                         std::cout << arr[i] << " ";
                 } else {
                     std::cout << "Oops! Se pare ca a fost introdusa o valoare gresita.\n";
