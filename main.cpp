@@ -3,7 +3,6 @@
 #include <random>       //std::random_device()
 #include <algorithm>    //std::shuffle()
 #include <Windows.h>    //Sleep()
-#include <fstream>
 
 void selectionsort(std::vector<int>& arr) {
     // iterate from 0 to n-1. find the smallest element from 0 to n-1 and switch it with the one at the index 0
